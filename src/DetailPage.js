@@ -5,7 +5,7 @@ import RightPane from './components/RightPane';
 
 const ViewClaimsPage = () => {
   return (
-    <div className="h-screen">
+    <div className="h-screen bg-gray-50">
       <TopBar />
 
       {/* Main content area */}

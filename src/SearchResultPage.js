@@ -1,8 +1,8 @@
-// App.jsx
 import SearchComponent from "./components/SearchComponent";
 import { useNavigate } from "react-router-dom";
 import ClaimCard from "./components/SearchListClaimCard";
 import TopBar from "./components/TopBar";
+import FilterBar from "./components/FilterBar";
 
 const mockClaims = [
 	{
@@ -37,32 +37,30 @@ const SearchResultPage = ({ query, setQuery }) => {
 		}
 	};
 
-	return (
-		<div className="min-h-screen bg-white text-gray-900">
-			<TopBar />
-			<main className="mx-auto w-full px-4 py-6">
-				{/* Search row */}
-				<SearchComponent onSearch={handleSearch} query={query} setQuery={setQuery} />
+		return (
+			<div className="min-h-screen bg-gray-50">
+				<TopBar />
+				<main className="mx-auto w-full px-4 py-6">
+					{/* Search row */}
+					<SearchComponent onSearch={handleSearch} query={query} setQuery={setQuery} />
 
-				{/* Helper label */}
-				<p className="mt-1 text-xl font-semibold text-gray-400">
-					<span className="text-gray-500">Search topic:</span>{" "}
-					<span className="text-gray-400">{query}</span>
-				</p>
+					{/* Helper label */}
+					<p className="mt-1 text-md font-semibold">
+						<span className="text-gray-400">Search topic:</span>{" "}
+						<span className="text-gray-500">{query}</span>
+					</p>
 
-				{/* Claims list */}
-				<section className="mt-3 space-y-6">
-					{mockClaims.map((c, idx) => (
-						<div key={c.id} className="space-y-3">
-							{/* Card */}
-							<ClaimCard claim={c} />
+					{/* Filter bar */}
+					<FilterBar />
 
-							{/* Divider */}
-							{idx < mockClaims.length - 1 && (
-								<hr className="border-t border-gray-200" />
-							)}
-						</div>
-					))}
+					{/* Claims list */}
+					<section className="mt-3 space-y-6">
+						{mockClaims.map((c, idx) => (
+							<div key={c.id} className="space-y-3 bg-white shadow-sm">
+								{/* Card */}
+								<ClaimCard claim={c} />
+							</div>
+						))}
 				</section>
 			</main>
 		</div>
