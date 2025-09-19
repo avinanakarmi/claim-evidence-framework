@@ -58,6 +58,7 @@ const SearchComponent = ({ onSearch, query, setQuery }) => {
 					</button>
 					{showSuggestions && filteredSuggestions.length > 0 && (
 						<ul className="absolute left-0 right-0 mt-2 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
+							<li key="hint" className='text-sm font-bold px-6 pt-2 text-gray-300'>Suggestions</li>
 							{filteredSuggestions.map((s, i) => {
 								const lowerQuery = query.toLowerCase();
 								const lowerS = s.toLowerCase();
