@@ -1,9 +1,9 @@
 import './App.css';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
-import SearchPage from './SearchPage';
-import SearchResultPage from './SearchResultPage';
-import DetailPage from './DetailPage';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import SearchPage from './pages/SearchPage';
+import SearchResultPage from './pages/SearchResultPage';
+import DetailPage from './pages/DetailPage';
 
 
 import { useState } from 'react';

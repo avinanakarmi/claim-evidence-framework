@@ -1,11 +1,11 @@
 import React from "react";
-import SearchComponent from "./components/SearchComponent";
+import SearchComponent from "../components/SearchComponent";
 import { useNavigate } from "react-router-dom";
-import ClaimListCard from "./components/SearchListClaimCard";
-import ClaimGridCard from "./components/SearchGridClaimCard";
-import TopBar from "./components/TopBar";
-import FilterBar from "./components/FilterBar";
-import { GridIcon, ListIcon } from "./components/Icons";
+import ClaimListCard from "../components/SearchListClaimCard";
+import ClaimGridCard from "../components/SearchGridClaimCard";
+import TopBar from "../components/TopBar";
+import FilterBar from "../components/filter/FilterBar";
+import { GridIcon, ListIcon } from "../components/Icons";
 
 const mockClaims = [
 	{

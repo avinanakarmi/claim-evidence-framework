@@ -1,7 +1,7 @@
-import './App.css';
-import TopBar from './components/TopBar';
-import LeftPane from './components/LeftPane';
-import RightPane from './components/RightPane';
+import '../App.css';
+import TopBar from '../components/TopBar';
+import LeftPane from '../components/LeftPane';
+import RightPane from '../components/RightPane';
 
 const ViewClaimsPage = () => {
   return (

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import SearchComponent from './components/SearchComponent';
+import SearchComponent from '../components/SearchComponent';
 
 const SearchPage = ({ query, setQuery }) => {
   const navigate = useNavigate();
