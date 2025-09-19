@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const ClaimCard = ({ claim }) => {
+const ClaimListCard = ({ claim }) => {
 	const navigate = useNavigate();
 
 	const handleClick = () => {
@@ -31,4 +31,4 @@ const ClaimCard = ({ claim }) => {
 }
 
 
-export default ClaimCard;
+export default ClaimListCard;
