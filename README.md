@@ -1,5 +1,5 @@
 
-# VisClaimer — from visual evidence to clear claims
+# VisClaimer - from visual evidence to clear claims
 VisClaimer is an interactive interface built on the claim-evidence framework. It demonstrates how scientific charts and their captions encode multiple possible messages and how different reasoning strategies shape the claims that readers can draw.
 
 ## Project Goals
