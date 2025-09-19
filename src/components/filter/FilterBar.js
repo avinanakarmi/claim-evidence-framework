@@ -17,7 +17,7 @@ const FilterBar = ({filterResults}) => {
 
 	return (
 		<div className="flex flex-wrap items-center border-b pb-1 relative">
-			{/* Genre Dropdown */}
+			{/* Filter Dropdown */}
 			<div className="flex flex-row gap-10">
 				{
 					Object.keys(filters).map(f => (
