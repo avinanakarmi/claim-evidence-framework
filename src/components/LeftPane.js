@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LeftPane = () => (
-	<div className="min-h-[calc(100vh-64px)] w-full flex flex-col gap-4 max-w-md p-2 sm:border-r-2 sm:border-gray-500">
+	<div className="min-h-[calc(100vh-64px)] w-full flex flex-col gap-4 p-2">
 		<h2 className="text-left w-full text-lg font-bold">Chart + Caption</h2>
 		{/* Chart Area */}
 		<div className="p-0 sm:p-4 flex flex-col items-center justify-center">
