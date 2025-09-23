@@ -3,98 +3,21 @@ import ListAllClaims from './ListAllClaims';
 import GroupedClaims from './GroupedClaims';
 import { rsBgClassMap, rsTextColorMap } from '../constants';
 
-const claims_and_evidence = [
-	{
-		"claim": "1.5°C-consistent pathways tend to require lower final energy demand than other pathways",
-		"evidence": [
-			"1.5°C-consistent pathways are blue, other pathways grey …",
-			"Panel (c): blue curves lie mostly below grey by 2100."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Corroboration"
-	},
-	{
-		"claim": "Gross world product rises strongly across scenarios through 2100",
-		"evidence": [
-			"Panel (b): gross world product trajectories rise steadily toward 2100 across lines."
-		],
-		"source": ["chart"],
-		"rs": "Contrastive Reasoning"
-	},
-	{
-		"claim": "The highlighted S5 pathway ends with both higher GDP and higher final energy demand than other archetypes",
-		"evidence": [
-			"S5 highlighted",
-			"Panels (b,c): S5 curves are near the top by 2100 relative to S1, S2, LED."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "LED's food demand per capita declines over time, while S1 and S2 increase",
-		"evidence": [
-			"Panel (d): LED trend falls; S1 and S2 trend upward."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "LED's food demand per capita declines over time, while S1 and S2 increase",
-		"evidence": [
-			"Panel (d): LED trend falls; S1 and S2 trend upward."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "LED's food demand per capita declines over time, while S1 and S2 increase",
-		"evidence": [
-			"Panel (d): LED trend falls; S1 and S2 trend upward."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "LED's food demand per capita declines over time, while S1 and S2 increase",
-		"evidence": [
-			"Panel (d): LED trend falls; S1 and S2 trend upward."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "LED's food demand per capita declines over time, while S1 and S2 increase",
-		"evidence": [
-			"Panel (d): LED trend falls; S1 and S2 trend upward."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "LED's food demand per capita declines over time, while S1 and S2 increase",
-		"evidence": [
-			"Panel (d): LED trend falls; S1 and S2 trend upward."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Triangulation"
-	},
-	{
-		"claim": "With S2 and LED sharing identical population assumptions, their different energy-demand paths imply different per-capita energy use",
-		"evidence": [
-			"Population assumptions in S2 and LED are identical",
-			"Panel (c): LED is consistently below S2."
-		],
-		"source": ["chart", "caption"],
-		"rs": "Causal Inference"
-	},
-];
 
-const uniqueRS = [...new Set(claims_and_evidence.map(item => item.rs))];
+const RightPane = ({ selectedChart, allClaimsForChart = [] }) => {
+	// Transform the API data to match the expected format for the existing UI components
+	const claims_and_evidence = allClaimsForChart.map(claim => ({
+		claim: claim.title,
+		evidence: Array.isArray(claim.evidence) ? claim.evidence : [claim.evidence].filter(Boolean),
+		source: [claim.sourceOfEvidence],
+		rs: claim.reasoningStrategy
+	}));
 
-const RightPane = () => {
+	const uniqueRS = [...new Set(claims_and_evidence.map(item => item.rs))];
 	const [shownClaims, setShownClaims] = React.useState(claims_and_evidence);
 	const [filteredRS, setFilteredRS] = React.useState(uniqueRS);
 	const [groupedByRS, setGroupedByRS] = React.useState(false);
+
 
 	useEffect(() => {
 		if (filteredRS.length === 0) {
@@ -103,7 +26,14 @@ const RightPane = () => {
 			const filtered = claims_and_evidence.filter(item => filteredRS.includes(item.rs));
 			setShownClaims(filtered);
 		}
-	}, [filteredRS]);
+	}, [filteredRS, claims_and_evidence]);
+
+	// Update state when allClaimsForChart changes
+	useEffect(() => {
+		setShownClaims(claims_and_evidence);
+		const newUniqueRS = [...new Set(claims_and_evidence.map(item => item.rs))];
+		setFilteredRS(newUniqueRS);
+	}, [allClaimsForChart, claims_and_evidence]);
 
 	return (
 		<div className="flex flex-col gap-2 w-full px-4">

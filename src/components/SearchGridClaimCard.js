@@ -1,16 +1,8 @@
-import { useNavigate } from "react-router-dom";
-
-const ClaimCard = ({ claim }) => {
-	const navigate = useNavigate();
-
-	const handleClick = () => {
-		navigate('/detail/' + claim.id);
-	};
-
+const ClaimCard = ({ claim, handleClick }) => {
 	return (
 		<article
       className="flex flex-col gap-3 p-4 bg-white rounded-xl shadow hover:shadow-lg transition cursor-pointer"
-      onClick={handleClick}
+      onClick={() => handleClick(claim.id)}
     >
       {/* Header: Claim Title */}
       <h3 className="text-lg font-bold text-gray-900 mb-1">

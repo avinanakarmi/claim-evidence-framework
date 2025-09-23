@@ -1,16 +1,6 @@
-import { useNavigate } from 'react-router-dom';
 import SearchComponent from '../components/SearchComponent';
 
-const SearchPage = ({ query, setQuery }) => {
-  const navigate = useNavigate();
-
-  const handleSearch = (q) => {
-    if (q) {
-      setQuery(q);
-      navigate('/results?q=' + encodeURIComponent(q));
-    }
-  };
-
+const SearchPage = () => {
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-gray-50">
       {/* Logo */}
@@ -26,7 +16,7 @@ const SearchPage = ({ query, setQuery }) => {
           Search a topic to find relevant scientific visualizations and the claims they support.
         </p>
       {/* Search Box */}
-      <SearchComponent onSearch={handleSearch} query={query} setQuery={setQuery} />
+      <SearchComponent />
       {/* Footer */}
       <footer className="absolute bottom-0 w-full text-center py-4 text-gray-500 text-xs bg-transparent">
         © {new Date().getFullYear()} VisClaimer
