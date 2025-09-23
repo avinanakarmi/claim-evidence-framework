@@ -16,7 +16,7 @@ const GroupedClaims = ({ uniqueRS, claims }) => {
         <div key={rs} className={cardHeight}>
           <ReasoningCard
             rs={rs}
-            claims={claims.filter((item) => item.rs === rs)}
+            claims={claims.filter((item) => item.reasoningStrategy === rs)}
           />
         </div>
       ))}

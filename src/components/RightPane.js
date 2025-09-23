@@ -4,17 +4,9 @@ import GroupedClaims from './GroupedClaims';
 import { rsBgClassMap, rsTextColorMap } from '../constants';
 
 
-const RightPane = ({ selectedChart, allClaimsForChart = [] }) => {
-	// Transform the API data to match the expected format for the existing UI components
-	const claims_and_evidence = allClaimsForChart.map(claim => ({
-		claim: claim.title,
-		evidence: Array.isArray(claim.evidence) ? claim.evidence : [claim.evidence].filter(Boolean),
-		source: [claim.sourceOfEvidence],
-		rs: claim.reasoningStrategy
-	}));
-
-	const uniqueRS = [...new Set(claims_and_evidence.map(item => item.rs))];
-	const [shownClaims, setShownClaims] = React.useState(claims_and_evidence);
+const RightPane = ({ allClaimsForChart = [] }) => {
+	const uniqueRS = [...new Set(allClaimsForChart.map(item => item.reasoningStrategy))];
+	const [shownClaims, setShownClaims] = React.useState(allClaimsForChart);
 	const [filteredRS, setFilteredRS] = React.useState(uniqueRS);
 	const [groupedByRS, setGroupedByRS] = React.useState(false);
 
@@ -23,17 +15,11 @@ const RightPane = ({ selectedChart, allClaimsForChart = [] }) => {
 		if (filteredRS.length === 0) {
 			setShownClaims([]);
 		} else {
-			const filtered = claims_and_evidence.filter(item => filteredRS.includes(item.rs));
+			const filtered = allClaimsForChart.filter(item => filteredRS.includes(item.reasoningStrategy));
 			setShownClaims(filtered);
 		}
-	}, [filteredRS, claims_and_evidence]);
+	}, [filteredRS]);
 
-	// Update state when allClaimsForChart changes
-	useEffect(() => {
-		setShownClaims(claims_and_evidence);
-		const newUniqueRS = [...new Set(claims_and_evidence.map(item => item.rs))];
-		setFilteredRS(newUniqueRS);
-	}, [allClaimsForChart, claims_and_evidence]);
 
 	return (
 		<div className="flex flex-col gap-2 w-full px-4">
@@ -84,7 +70,7 @@ const RightPane = ({ selectedChart, allClaimsForChart = [] }) => {
 
 			{/* Claims and Evidence List */}
 			{groupedByRS ? (
-				<GroupedClaims uniqueRS={uniqueRS} claims={claims_and_evidence} />
+				<GroupedClaims uniqueRS={uniqueRS} claims={allClaimsForChart} />
 			) : (
 				<ListAllClaims shownClaims={shownClaims} />
 			)}

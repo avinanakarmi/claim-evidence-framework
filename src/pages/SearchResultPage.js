@@ -148,7 +148,7 @@ const SearchResultPage = () => {
 								<button
 									onClick={() => fetchNextPage()}
 									disabled={isFetchingNextPage}
-									className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors"
+									className="px-6 py-3 bg-white text-[#4F46E5] rounded-lg hover:border-[#4F46E5] border transition-colors"
 								>
 									{isFetchingNextPage ? 'Loading more...' : 'Load More Claims'}
 								</button>

@@ -5,39 +5,19 @@ import LeftPane from '../components/LeftPane';
 import RightPane from '../components/RightPane';
 import React, { useRef, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQueryClient } from '@tanstack/react-query';
 import { useClaimsByImageId } from '../hooks/useClaims';
 
 
 const ViewClaimsPage = () => {
-  const { claimId } = useParams();
+  const {imageId } = useParams();
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
-
-  // Get all cached search results to find our specific claim
-  const allCachedQueries = queryClient.getQueriesData({
-    queryKey: ['claims', 'search']
-  });
-
-  // Find the selected claim from cache to get its image_id
-  let selectedClaim = null;
-  
-  for (const [, data] of allCachedQueries) {
-    if (data && Array.isArray(data)) {
-      const foundClaim = data.find(claim => claim.id.toString() === claimId);
-      if (foundClaim) {
-        selectedClaim = foundClaim;
-        break;
-      }
-    }
-  }
 
   // Fetch all claims for this image_id directly from API (no caching)
   const { 
     data: allClaimsForChart = [], 
     isLoading: claimsLoading, 
     error: claimsError 
-  } = useClaimsByImageId(selectedClaim?.image_id);
+  } = useClaimsByImageId(imageId);
 
   const [leftWidth, setLeftWidth] = useState(340); // px, initial width
   const dragging = useRef(false);
@@ -64,7 +44,7 @@ const ViewClaimsPage = () => {
     };
   }, []);
 
-  if (!selectedClaim) {
+  if (!claimsError && !claimsLoading && allClaimsForChart.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50">
         <TopBar />
@@ -72,7 +52,7 @@ const ViewClaimsPage = () => {
           <div className="bg-white rounded-lg shadow-sm border p-6 text-center">
             <h2 className="text-xl font-semibold text-gray-900 mb-2">Claim Not Found</h2>
             <p className="text-gray-600 mb-4">
-              The requested claim could not be found. It may have been removed or the link is invalid.
+              Claims for the selected chart could not be found. It may have been removed or the link is invalid.
             </p>
             <button
               onClick={() => navigate(-1)}
@@ -123,6 +103,7 @@ const ViewClaimsPage = () => {
       </div>
     );
   }
+console.log(allClaimsForChart);
 
   return (
     <div className="h-screen bg-gray-50">
@@ -134,7 +115,7 @@ const ViewClaimsPage = () => {
           className="overflow-auto flex-shrink-0 bg-white border-r border-gray-200"
           style={{ width: leftWidth, minWidth: 220, maxWidth: 600 }}
         >
-          <LeftPane image_id={selectedClaim.image_id} caption={selectedClaim.caption} />
+          <LeftPane image_id={imageId} caption={allClaimsForChart[0].caption} />
         </div>
         {/* Drag handle */}
         <div
@@ -144,7 +125,7 @@ const ViewClaimsPage = () => {
         />
         {/* RightPane */}
         <div className="flex-1 min-w-0 overflow-auto">
-          <RightPane selectedChart={{ image_id: selectedClaim.image_id }} allClaimsForChart={allClaimsForChart} />
+          <RightPane allClaimsForChart={allClaimsForChart} />
         </div>
       </main>
     </div>

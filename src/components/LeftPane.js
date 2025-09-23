@@ -7,7 +7,7 @@ const LeftPane = ({image_id, caption}) => (
 		<div className="p-0 sm:p-4 flex flex-col items-center justify-center">
 			<div className="w-full flex items-center justify-center rounded mb-2">
 				<img
-					src={`https://picsum.photos/id/${image_id}/639.png`}
+					src={`https://picsum.photos/id/${image_id}/300/300`}
 					alt="Chart"
 					className="w-full h-auto object-contain"
 				/>

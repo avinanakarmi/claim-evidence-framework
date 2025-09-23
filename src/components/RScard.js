@@ -31,7 +31,7 @@ const ReasoningCard = ({ rs, claims }) => {
 						<div className="flex flex-row items-start gap-2 flex-1" style={{ marginRight: '150px' }}>
 							<div className="flex-1 flex flex-col">
 								<div className="text-gray-900 font-medium text-left">
-									{item.claim}
+									{item.title}
 								</div>
 								<span className="font-semibold text-left text-gray-500">Evidence: </span>
 								<ul className="list-disc list-inside text-gray-500 ml-0 pl-4">

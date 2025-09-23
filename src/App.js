@@ -6,8 +6,6 @@ import SearchPage from './pages/SearchPage';
 import SearchResultPage from './pages/SearchResultPage';
 import DetailPage from './pages/DetailPage';
 
-import { useState } from 'react';
-
 // Create a client
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,7 +24,7 @@ function App() {
         <Routes>
           <Route path="/" element={<SearchPage />} />
           <Route path="/results" element={<SearchResultPage />} />
-          <Route path="/detail/:claimId" element={<DetailPage />} />
+          <Route path="/detail/:imageId" element={<DetailPage />} />
         </Routes>
       </Router>
     </QueryClientProvider>
